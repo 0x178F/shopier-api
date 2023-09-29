@@ -9,7 +9,9 @@ npm install shopier-api
 #### Create an instance of the Shopier class.
 
 ```javascript
-import Shopier from 'shopier-api';
+import { Shopier } from 'shopier-api';      //CommonJS
+const { Shopier } = require('shopier-api')  //ES
+
 
 const shopier = new Shopier('apiKey', 'apiSecret');
 ```

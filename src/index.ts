@@ -8,7 +8,7 @@ import {
 } from './interfaces';
 import { PlatformType, ProductType } from './enums';
 
-export default class Shopier {
+export class Shopier {
   private paymentUrl: string =
     'https://www.shopier.com/ShowProduct/api_pay4.php';
   private apiKey: string;
