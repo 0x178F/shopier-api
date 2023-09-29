@@ -3,16 +3,45 @@
   "version": "1.0.1",
   "description": "Shopier Payment Api",
   "type": "module",
-  "main": "shopier.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "release": "tsup && changeset publish",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "formatter": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
-  "keywords": [],
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@types/node": "^20.7.1",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
   "author": "Fatih Akdogan",
   "license": "ISC",
-  "dependencies": {
-    "crypto-js": "^4.1.1"
-  },
+  "keywords": [
+    "shopier",
+    "payment",
+    "api",
+    "shopier api",
+    "shopier payment api"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/0x178F/shopier-api.git"

@@ -1,0 +1,23 @@
+extends:
+  - '@commitlint/config-conventional'
+rules:
+  header-max-length: [1, 'always', 72]
+  type-enum:
+    - 2
+    - always
+    - - feat
+      - fix
+      - docs
+      - style
+      - refactor
+      - test
+      - revert
+help: |
+  **Possible types**:
+  `feat`:             Adds a new feature.
+  `fix`:              Solves a bug.
+  `docs`:             Adds or alters documentation.
+  `style`:            Improves formatting, white-space.
+  `refactor`:         Rewrites code without feature, performance or bug changes.
+  `test`:             Adds or modifies tests.
+  `revert`:           Changes that reverting other changes
