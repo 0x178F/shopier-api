@@ -15,7 +15,7 @@ rules:
       - revert
 help: |
   **Possible types**:
-  `ci`:       Changes to our CI configuration files and scripts
+  `ci`:               Changes to our CI configuration files and scripts
   `feat`:             Adds a new feature.
   `fix`:              Solves a bug.
   `docs`:             Adds or alters documentation.
