@@ -5,7 +5,8 @@ rules:
   type-enum:
     - 2
     - always
-    - - feat
+    - - ci
+      - feat
       - fix
       - docs
       - style
@@ -14,6 +15,7 @@ rules:
       - revert
 help: |
   **Possible types**:
+  `ci`:       Changes to our CI configuration files and scripts
   `feat`:             Adds a new feature.
   `fix`:              Solves a bug.
   `docs`:             Adds or alters documentation.
