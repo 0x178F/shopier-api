@@ -151,3 +151,5 @@ export class Shopier {
     }
   }
 }
+
+export * from './enums';
