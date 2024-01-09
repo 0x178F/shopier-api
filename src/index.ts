@@ -7,6 +7,8 @@ import {
   ICallback
 } from './interfaces';
 import { PlatformType, ProductType } from './enums';
+import { deprecate } from 'util';
+import { CurrencyType } from './enums/currencyTypes.enum';
 
 export class Shopier {
   private paymentUrl: string =
@@ -16,7 +18,7 @@ export class Shopier {
   private buyer: IBuyer = {} as IBuyer;
   private orderBilling: IBillingAddress = {} as IBillingAddress;
   private orderShipping: IShippingAddress = {} as IShippingAddress;
-  private currency: string = 'TRY';
+  private currency: CurrencyType = CurrencyType.TL;
   private moduleVersion: string = '1.0.4';
 
   constructor(apiKey: string, apiSecret: string) {
@@ -91,7 +93,18 @@ export class Shopier {
       .join('');
   }
 
+  /**
+   * @deprecated Use `generatePaymentHTML(amount: number)` instead
+   */
   payment(amount: number): string {
+    deprecate(
+      this.payment,
+      'payment(amount: number) is deprecated. Use generatePaymentHTML(amount: number) instead.'
+    );
+    return this.generatePaymentHTML(amount);
+  }
+
+  generatePaymentHTML(amount: number): string {
     const obj = this.generateIForm(amount);
     return `<!doctype html>
     <html lang="en">
@@ -113,8 +126,11 @@ export class Shopier {
     </html>`;
   }
 
-  setCurrency(currency: string) {
-    this.currency = currency;
+  setCurrency(currency: keyof typeof CurrencyType): this;
+  setCurrency(currency: CurrencyType): this;
+  setCurrency(currency: CurrencyType | keyof typeof CurrencyType) {
+    this.currency =
+      typeof currency === 'number' ? currency : CurrencyType[currency];
     return this;
   }
 
@@ -127,9 +143,10 @@ export class Shopier {
     return current_lan;
   }
 
-  callback(body: any, apiSecret: string): ICallback | boolean {
-    const data = body.random_nr + body.platform_order_id;
-    const hmac = createHmac('sha256', apiSecret);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  callback(body: any): ICallback | false {
+    const data = `${body.random_nr}${body.platform_order_id}`;
+    const hmac = createHmac('sha256', this.apiSecret);
     hmac.update(data);
     const expected = hmac.digest('base64');
     if (body.signature === expected) {
@@ -147,3 +164,5 @@ export class Shopier {
     }
   }
 }
+
+export * from './enums';

@@ -4,7 +4,7 @@ export interface IForm extends IBuyer, IShippingAddress, IBillingAddress {
   API_key: string;
   website_index: number;
   total_order_value: number;
-  currency: string;
+  currency: number;
   platform: number;
   is_in_frame: number;
   current_language: number;
