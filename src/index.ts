@@ -131,9 +131,10 @@ export class Shopier {
     return current_lan;
   }
 
-  callback(body: any, apiSecret: string): ICallback | boolean {
-    const data = body.random_nr + body.platform_order_id;
-    const hmac = createHmac('sha256', apiSecret);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  callback(body: any): ICallback | false {
+    const data = `${body.random_nr}${body.platform_order_id}`;
+    const hmac = createHmac('sha256', this.apiSecret);
     hmac.update(data);
     const expected = hmac.digest('base64');
     if (body.signature === expected) {
