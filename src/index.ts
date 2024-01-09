@@ -7,6 +7,7 @@ import {
   ICallback
 } from './interfaces';
 import { PlatformType, ProductType } from './enums';
+import { CurrencyType } from './enums/currencyTypes.enum';
 
 export class Shopier {
   private paymentUrl: string =
@@ -16,7 +17,7 @@ export class Shopier {
   private buyer: IBuyer = {} as IBuyer;
   private orderBilling: IBillingAddress = {} as IBillingAddress;
   private orderShipping: IShippingAddress = {} as IShippingAddress;
-  private currency: string = 'TRY';
+  private currency: CurrencyType = CurrencyType.TL;
   private moduleVersion: string = '1.0.4';
 
   constructor(apiKey: string, apiSecret: string) {
@@ -113,8 +114,11 @@ export class Shopier {
     </html>`;
   }
 
-  setCurrency(currency: string) {
-    this.currency = currency;
+  setCurrency(currency: keyof typeof CurrencyType): this;
+  setCurrency(currency: CurrencyType): this;
+  setCurrency(currency: CurrencyType | keyof typeof CurrencyType) {
+    this.currency =
+      typeof currency === 'number' ? currency : CurrencyType[currency];
     return this;
   }
 
