@@ -1,5 +1,11 @@
 # shopier-api
 
+## 1.1.4
+
+### Patch Changes
+
+- 115ffb8: refactoring and few fixes
+
 ## 1.1.3
 
 ### Patch Changes
