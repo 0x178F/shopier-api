@@ -56,7 +56,7 @@ shopier.setOrderShipping({
 #### For 15₺:
 
 ```javascript
-const paymentPage = shopier.payment(15);
+const paymentPage = shopier.generatePaymentHTML(15);
 ```
 
 > This will return the purchase form as html.

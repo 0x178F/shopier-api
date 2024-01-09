@@ -7,6 +7,7 @@ import {
   ICallback
 } from './interfaces';
 import { PlatformType, ProductType } from './enums';
+import { deprecate } from 'util';
 import { CurrencyType } from './enums/currencyTypes.enum';
 
 export class Shopier {
@@ -92,7 +93,18 @@ export class Shopier {
       .join('');
   }
 
+  /**
+   * @deprecated Use `generatePaymentHTML(amount: number)` instead
+   */
   payment(amount: number): string {
+    deprecate(
+      this.payment,
+      'payment(amount: number) is deprecated. Use generatePaymentHTML(amount: number) instead.'
+    );
+    return this.generatePaymentHTML(amount);
+  }
+
+  generatePaymentHTML(amount: number): string {
     const obj = this.generateIForm(amount);
     return `<!doctype html>
     <html lang="en">
